@@ -9,4 +9,10 @@ describe('thermostat', () => {
     thermostat.increaseTemperature();
     expect(thermostat.defaultTemperature).toEqual(21);
   });
+
+  it('decreases temperature by one when decrease temperature method is called', () => {
+    let thermostat = new Thermostat();
+    thermostat.decreaseTemperature();
+    expect(thermostat.defaultTemperature).toEqual(19);
+  });
 });
