@@ -1,5 +1,6 @@
 let Thermostat = function Thermostat() {
   this.defaultTemperature = 20;
+  this.minimumTemperature = 10;
 };
 
 Thermostat.prototype.increaseTemperature = function() {
@@ -7,5 +8,7 @@ Thermostat.prototype.increaseTemperature = function() {
 };
 
 Thermostat.prototype.decreaseTemperature = function() {
-  this.defaultTemperature -= 1;
+  if (this.defaultTemperature > this.minimumTemperature) {
+    this.defaultTemperature -= 1;
+  }
 };
