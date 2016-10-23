@@ -6,17 +6,17 @@ describe('thermostat', () => {
   });
 
   it('has a default starting temperature', () => {
-    expect(thermostat.defaultTemperature).toEqual(20);
+    expect(thermostat.currentTemperature).toEqual(20);
   });
 
   it('increases temperature by one when increase temperature method is called', () => {
     thermostat.increaseTemperature();
-    expect(thermostat.defaultTemperature).toEqual(21);
+    expect(thermostat.currentTemperature).toEqual(21);
   });
 
   it('decreases temperature by one when decrease temperature method is called', () => {
     thermostat.decreaseTemperature();
-    expect(thermostat.defaultTemperature).toEqual(19);
+    expect(thermostat.currentTemperature).toEqual(19);
   });
 
   it('has a minimum temperature of 10', () => {
@@ -27,7 +27,7 @@ describe('thermostat', () => {
     for (let i = 0; i < 11; i++) {
       thermostat.decreaseTemperature();
     }
-    expect(thermostat.defaultTemperature).toEqual(10);
+    expect(thermostat.currentTemperature).toEqual(10);
   });
 
   it('has a default power saving mode off', () => {
@@ -51,7 +51,7 @@ describe('thermostat', () => {
     for (let i = 0; i < 16; i++) {
       thermostat.increaseTemperature();
     }
-    expect(thermostat.defaultTemperature).toEqual(35);
+    expect(thermostat.currentTemperature).toEqual(35);
   });
 
   it('has a maximum temperature of 25 when powerSavingMode is on', () => {
@@ -59,6 +59,31 @@ describe('thermostat', () => {
     for (var i = 0; i < 6; i++) {
       thermostat.increaseTemperature();
     }
-    expect(thermostat.defaultTemperature).toEqual(25);
+    expect(thermostat.currentTemperature).toEqual(25);
+  });
+
+  it('has a reset fucntion that retuns the temperature to 20', () => {
+    thermostat.increaseTemperature();
+    thermostat.increaseTemperature();
+    thermostat.resetTemperature();
+    expect(thermostat.currentTemperature).toEqual(20);
+  });
+
+  it('has a red colour when the current temperature is above 24', () => {
+    for (var i = 0; i < 5; i++) {
+      thermostat.increaseTemperature();
+    }
+    expect(thermostat.colourState).toEqual('Red');
+  });
+
+  it('has a yellow colour when the current temperature is between 18 and 24', () => {
+    expect(thermostat.colourState).toEqual('Yellow');
+  });
+
+  it('has a green colour when the current temperature is below 18', () => {
+    for (var i = 0; i < 5; i++) {
+      thermostat.decreaseTemperature();
+    }
+    expect(thermostat.colourState).toEqual('Green');
   });
 });
